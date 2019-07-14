@@ -15,7 +15,7 @@ deck_t new_deck() {
     int i = 0;
     for (int s = CLUBS; s <= DIAMONDS; s++)
         for (int r = ACE; r <= KING; r++, i++)
-            cards[i] = new_card(r, s, false);
+            cards[i] = new_card(r, s, true);
     for (i = 0; i < 52; i++)
         hand_add_card(&hand, &cards[i]);
     return (deck_t) {

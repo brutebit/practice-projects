@@ -12,6 +12,7 @@ int main() {
             while (getchar() != '\n');
     }
     while (getchar() != '\n');
+    putchar('\n');
     char **names = calloc(7, sizeof(char **));
     for (i = 0; i < 7; i++) {
         names[i] = calloc(4, sizeof(char *));
@@ -22,6 +23,7 @@ int main() {
         getline(&names[i], &res_size, stdin);
         names[i][strlen(names[i]) - 1] = '\0';
     }
+    putchar('\n');
     names[i] = NULL;
     char again = 'y';
     while (again != 'n' && again != 'N') {

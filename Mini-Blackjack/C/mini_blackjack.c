@@ -23,6 +23,19 @@ mini_blackjack_t new_mini_blackjack(char *names[]) {
     };
 }
 
+static void print_player(abstract_player_t *ap) {
+    abstract_player_print(ap);
+    putchar('\n');
+}
+
+static void delete_mini_blackjack(mini_blackjack_t *game) {
+    for (int i = 0; i < game->players_length; i++)
+        delete_abstract_player(&game->players[i].ap);
+    delete_abstract_player(&game->house.ap);
+    delete_deck(&game->deck);
+    free(game->players);
+}
+
 void mini_blackjack_play(mini_blackjack_t *game) {
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < game->players_length; j++)
@@ -30,17 +43,16 @@ void mini_blackjack_play(mini_blackjack_t *game) {
         deck_deal(&game->deck, &game->house.ap.hand);
     }
     house_flip_first_card(&(game->house));
+    for (int i = 0; i < game->players_length; i++)
+        print_player(&game->players[i].ap);
+    print_player(&game->house.ap);
+    putchar('\n');
     for (int i = 0; i < game->players_length; i++) {
-        abstract_player_print(&game->players[i].ap);
+        deck_additional_cards(&game->deck, &game->players[i].ap);
         putchar('\n');
     }
-    abstract_player_print(&game->house.ap);
-    putchar('\n');
-    for (int i = 0; i < game->players_length; i++)
-        deck_additional_cards(&game->deck, &game->players[i].ap);
     house_flip_first_card(&game->house);
-    abstract_player_print(&game->house.ap);
-    putchar('\n');
+    print_player(&game->house.ap);
     deck_additional_cards(&game->deck, &game->house.ap);
     if (abstract_player_is_busted(&game->house.ap)) {
         for (int i = 0; i < game->players_length; i++)
@@ -60,9 +72,5 @@ void mini_blackjack_play(mini_blackjack_t *game) {
                     player_push(&game->players[i]);
             }
     }
-    for (int i = 0; i < game->players_length; i++)
-        delete_hand(&(game->players[i].ap.hand));
-    delete_hand(&game->house.ap.hand);
-    delete_deck(&game->deck);
-    free(game->players);
+    delete_mini_blackjack(game);
 }

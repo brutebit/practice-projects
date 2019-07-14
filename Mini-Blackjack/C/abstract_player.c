@@ -16,7 +16,7 @@ bool abstract_player_is_busted(abstract_player_t *ap) {
 }
 
 void abstract_player_bust(abstract_player_t *ap) {
-    printf("%s busts.\n", ap->name);
+    printf("%s busts.\n\n", ap->name);
 }
 
 void abstract_player_print(abstract_player_t *ap) {
@@ -31,4 +31,8 @@ void abstract_player_print(abstract_player_t *ap) {
     }
     else
         printf("<empty>");
+}
+
+void delete_abstract_player(abstract_player_t *ap) {
+    delete_hand(&ap->hand);
 }

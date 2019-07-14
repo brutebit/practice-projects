@@ -13,5 +13,6 @@ abstract_player_t new_abstract_player(char *, char *);
 bool abstract_player_is_busted(abstract_player_t *);
 void abstract_player_bust(abstract_player_t *);
 void abstract_player_print(abstract_player_t *);
+void delete_abstract_player(abstract_player_t *);
 
 #endif
