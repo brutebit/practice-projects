@@ -3,3 +3,8 @@
 a.out
 main
 git.sh
+.idea
+target
+*.iml
+*.lock
+**/*.rs.bk
