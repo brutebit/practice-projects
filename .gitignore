@@ -8,3 +8,4 @@ target
 *.iml
 *.lock
 **/*.rs.bk
+.vscode
