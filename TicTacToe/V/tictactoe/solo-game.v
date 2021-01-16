@@ -44,7 +44,7 @@ pub fn (mut s SoloGame) human_move() {
 }
 
 pub fn (mut s SoloGame) machine_move() {
-	play_random := fn (mut s_ptr &SoloGame) {
+	play_random := fn (mut s_ptr SoloGame) {
 		mut random := 0
 		for !s_ptr.board.is_move_legal(random) {
 			random = int_in_range(1, 9)
@@ -56,7 +56,7 @@ pub fn (mut s SoloGame) machine_move() {
 		play_random(mut s)
 		return
 	}
-	check_for_win_move := fn (mut s_ptr &SoloGame, p Piece) (bool,int) {
+	check_for_win_move := fn (mut s_ptr SoloGame, p Piece) (bool, int) {
 		mut move := 1
 		for move <= 9 {
 			if s_ptr.board.is_move_legal(move) {
@@ -64,19 +64,19 @@ pub fn (mut s SoloGame) machine_move() {
 				status := if p == .x { Status.win_x } else { Status.win_o }
 				if s_ptr.board.check_game_status() == status {
 					s_ptr.board.unmake_move(move)
-					return true,move
+					return true, move
 				}
 				s_ptr.board.unmake_move(move)
 			}
 			move++
 		}
-		return false,move
+		return false, move
 	}
-    human_win_found, h_move := check_for_win_move(mut s, s.human_piece)
-    machine_win_found, m_move := check_for_win_move(mut s, s.machine_piece)
+	human_win_found, h_move := check_for_win_move(mut s, s.human_piece)
+	machine_win_found, m_move := check_for_win_move(mut s, s.machine_piece)
 	win_move_found := human_win_found || machine_win_found
 	if win_move_found {
-        move := if human_win_found { h_move } else { m_move }
+		move := if human_win_found { h_move } else { m_move }
 		println('i shall take square number $move\n')
 		s.board.make_move(move, s.machine_piece)
 		return
@@ -90,18 +90,18 @@ pub fn (mut s SoloGame) machine_move() {
 		if !s.board.is_move_legal(m) {
 			continue
 		}
-	    println('i shall take square number $m\n')
+		println('i shall take square number $m\n')
 		s.board.make_move(m, s.machine_piece)
 		break
 	}
 }
 
 pub fn (s SoloGame) display_board() {
-    s.board.display()
+	s.board.display()
 }
 
 pub fn (s SoloGame) check_game_status() Status {
-    return s.board.check_game_status()
+	return s.board.check_game_status()
 }
 
 pub fn (s SoloGame) print_end(status Status) {

@@ -28,33 +28,33 @@ const (
 
 pub struct Board {
 mut:
-	first_row  []Piece = []Piece{len:3,init:.empty}
-	second_row []Piece = []Piece{len:3,init:.empty}
-	third_row  []Piece = []Piece{len:3,init:.empty}
+	first_row  []Piece = []Piece{len: 3, init: .empty}
+	second_row []Piece = []Piece{len: 3, init: .empty}
+	third_row  []Piece = []Piece{len: 3, init: .empty}
 }
 
 pub fn (b Board) display() {
-    piece_to_char := fn (piece Piece) string {
-        match piece {
-            .empty { return ' ' }
-            .x { return 'X' }
-            .o { return 'O' }
-        }
-    }
-    first1 := piece_to_char(b.first_row[0])
-    first2 := piece_to_char(b.first_row[1])
-    first3 := piece_to_char(b.first_row[2])
-    second1 := piece_to_char(b.second_row[0])
-    second2 := piece_to_char(b.second_row[1])
-    second3 := piece_to_char(b.second_row[2])
-    third1 := piece_to_char(b.third_row[0])
-    third2 := piece_to_char(b.third_row[1])
-    third3 := piece_to_char(b.third_row[2])
-	println('\t\t\t${first1} | ${first2} | ${first3}')
+	piece_to_char := fn (piece Piece) string {
+		match piece {
+			.empty { return ' ' }
+			.x { return 'X' }
+			.o { return 'O' }
+		}
+	}
+	first1 := piece_to_char(b.first_row[0])
+	first2 := piece_to_char(b.first_row[1])
+	first3 := piece_to_char(b.first_row[2])
+	second1 := piece_to_char(b.second_row[0])
+	second2 := piece_to_char(b.second_row[1])
+	second3 := piece_to_char(b.second_row[2])
+	third1 := piece_to_char(b.third_row[0])
+	third2 := piece_to_char(b.third_row[1])
+	third3 := piece_to_char(b.third_row[2])
+	println('\t\t\t$first1 | $first2 | $first3')
 	println('\t\t\t---------')
-	println('\t\t\t${second1} | ${second2} | ${second3}')
+	println('\t\t\t$second1 | $second2 | $second3')
 	println('\t\t\t---------')
-	println('\t\t\t${third1} | ${third2} | ${third3}\n')
+	println('\t\t\t$third1 | $third2 | $third3\n')
 }
 
 fn (b Board) get_piece(position int) Piece {
@@ -68,10 +68,10 @@ fn (b Board) get_piece(position int) Piece {
 }
 
 pub fn (b Board) is_move_legal(position int) bool {
-    if position in [1,2,3,4,5,6,7,8,9] {
-	    return b.get_piece(position) == .empty
-    }
-    return false
+	if position in [1, 2, 3, 4, 5, 6, 7, 8, 9] {
+		return b.get_piece(position) == .empty
+	}
+	return false
 }
 
 pub fn (mut b Board) make_move(position int, piece Piece) {

@@ -21,7 +21,7 @@ fn ask_yes_no(qs string) Accept {
 }
 
 fn ask_for_move(qs string) int {
-    mut answer := 0
+	mut answer := 0
 	for {
 		input := read_line(qs) or { '' }
 		trimmed := input.trim_space()
@@ -29,7 +29,7 @@ fn ask_for_move(qs string) int {
 		// range gives a weird error here
 		if num in [1, 2, 3, 4, 5, 6, 7, 8, 9] {
 			answer = num
-            break
+			break
 		}
 	}
 	return answer

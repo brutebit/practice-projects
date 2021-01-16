@@ -115,14 +115,20 @@ fn (mut m Menu) read_sub_option() {
 
 fn (mut m Menu) set_selected_option(s string) {
 	match s {
-		'1' { m.selected_option = .solo }
-		'2' { m.selected_option = .multi }
+		'1' {
+			m.selected_option = .solo
+		}
+		'2' {
+			m.selected_option = .multi
+		}
 		'3' {
-            m.selected_option = .exit
-            println('Thank you for playing TicTacToe. have a good day ahead:}')
-            exit(0)
-        }
-		else { m.selected_option = .non }
+			m.selected_option = .exit
+			println('Thank you for playing TicTacToe. have a good day ahead:}')
+			exit(0)
+		}
+		else {
+			m.selected_option = .non
+		}
 	}
 }
 
@@ -137,18 +143,17 @@ fn (mut m Menu) set_selected_sub_option(s string) {
 				m.selected_sub_option = SubOption(SoloGameOption.hard)
 			} else {
 				m.selected_sub_option = SubOption(SoloGameOption.back)
-                m.selected_option = .non
-                m.cycle()
+				m.selected_option = .non
+				m.cycle()
 			}
-
 		}
 		.multi {
 			if s == '1' {
 				m.selected_sub_option = SubOption(MultiplayerGameOption.start)
 			} else {
 				m.selected_sub_option = SubOption(MultiplayerGameOption.back)
-                m.selected_option = .non
-                m.cycle()
+				m.selected_option = .non
+				m.cycle()
 			}
 		}
 		else {
